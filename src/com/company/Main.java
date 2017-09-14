@@ -22,9 +22,9 @@ public class Main {
             }
         }
 
-        new Main().print(lijst1);
+        new Main().print(lijst1, "lijst 1 ongesorteerd: ");
         System.out.println("\n");
-        new Main().print(lijst2);
+        new Main().print(lijst2, "lijst 2 ongesorteerd: ");
         System.out.println("\n");
 
         SortThread s1 = new SortThread(lijst1);
@@ -43,14 +43,12 @@ public class Main {
         }
 
         int[] gesorteerd1 = s1.getTeSorteren();
-        new Main().print(gesorteerd1);
+        new Main().print(gesorteerd1, "lijst 1 gesorteerd: ");
         System.out.println("\n");
 
         int[] gesorteerd2 = s2.getTeSorteren();
-        new Main().print(gesorteerd2);
+        new Main().print(gesorteerd2, "lijst 2 gesorteerd: ");
         System.out.println("\n");
-
-        
 
 
         //sorteren
@@ -72,8 +70,9 @@ public class Main {
     }
 
 
-    public void print(int[] lijst) {
+    public void print(int[] lijst, String woord) {
 
+        System.out.println(woord);
         for (int i : lijst) {
 
             System.out.print(i);
