@@ -1,12 +1,15 @@
 package com.company;
 
 
+import java.util.ArrayList;
+
 public class Main {
 
 
     public static void main(String[] args) {
 //
-        int aantal = 10;
+        int aantal = 10000;
+        ArrayList<Integer> klaar = new ArrayList<>();
 
         int lijst1[] = new int[aantal / 2];
         int lijst2[] = new int[aantal / 2];
@@ -33,6 +36,7 @@ public class Main {
         Thread t1 = new Thread(s1);
         Thread t2 = new Thread(s2);
 
+        long startTime = System.nanoTime();
         t1.start();
         t2.start();
         try {
@@ -50,6 +54,52 @@ public class Main {
         new Main().print(gesorteerd2, "lijst 2 gesorteerd: ");
         System.out.println("\n");
 
+        //samenvoegen
+//        for (int i = 0; i <lijst1.length; i++) {
+//            for (int j = 0; j < lijst1.length; j++) {
+//
+//
+//                if (lijst1[i] <= lijst2[i]) {
+//                    klaar.add(lijst1[i]);
+//
+//                } else {
+//                    klaar.add(lijst2[i]);
+//                }
+//
+//            }
+//        }
+
+        int i = 0;
+        int j = 0;
+        int a = 0;
+        System.out.println(lijst1.length);
+        while (a < aantal) {
+
+            if (i == aantal/2) {
+                klaar.add(lijst2[j]);
+                j++;
+            } else if (j == aantal/2) {
+                klaar.add(lijst1[i]);
+                i++;
+            }
+            else if (lijst1[i] <= lijst2[j]) {
+                klaar.add(lijst1[i]);
+                i++;
+
+            } else {
+                klaar.add(lijst2[j]);
+                j++;
+            }
+
+
+            a++;
+
+
+        }
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime;
+        System.out.println(klaar.toString());
+        System.out.println(duration / 1000000 + "ms" );
 
         //sorteren
 //            new Main().print(ongesorteerd);
