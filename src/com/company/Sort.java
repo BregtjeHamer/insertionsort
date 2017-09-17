@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Sort {
 
 
@@ -25,4 +27,42 @@ public class Sort {
         }
 
     }
+
+    public static ArrayList<Integer> mergen(int[] lijst1, int[] lijst2) {
+        ArrayList<Integer> klaar = new ArrayList<>();
+
+        int i = 0, j = 0, k = 0;
+        while (i < lijst1.length && j < lijst2.length)
+        {
+            if (lijst1[i] < lijst2[j])
+            {
+                klaar.add(lijst1[i]);
+                i++;
+            }
+            else
+            {
+                klaar.add(lijst2[j]);
+                j++;
+            }
+            k++;
+        }
+
+        while (i < lijst1.length)
+        {
+            klaar.add(lijst1[i]);
+            i++;
+            k++;
+        }
+
+        while (j < lijst2.length)
+        {
+            klaar.add(lijst2[j]);
+            j++;
+            k++;
+        }
+
+        return klaar;
+    }
+
+
 }
