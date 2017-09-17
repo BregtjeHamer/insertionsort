@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 //
-        int aantal = 30;
+        int aantal = 50000;
         ArrayList<Integer> klaar;
 
         int lijst1[] = new int[aantal / 2];
@@ -75,6 +75,7 @@ public class Main {
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
         System.out.println(klaar.toString());
+        System.out.println(Integer.toString(klaar.size()));
         System.out.println(duration / 1000000 + "ms" );
 
         //sorteren
