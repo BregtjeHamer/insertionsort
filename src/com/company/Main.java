@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 //
-        int aantal = 10000;
+        int aantal = 30;
         ArrayList<Integer> klaar = new ArrayList<>();
 
         int lijst1[] = new int[aantal / 2];
