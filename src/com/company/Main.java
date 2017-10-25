@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
 //
-        int aantal = 30;
-        ArrayList<Integer> klaar = new ArrayList<>();
+        int aantal = 50000;
+        ArrayList<Integer> klaar;
 
         int lijst1[] = new int[aantal / 2];
         int lijst2[] = new int[aantal / 2];
@@ -69,36 +69,13 @@ public class Main {
 //            }
 //        }
 
-        int i = 0;
-        int j = 0;
-        int a = 0;
-        System.out.println(lijst1.length);
-        while (a < aantal) {
-
-            if (i == aantal/2) {
-                klaar.add(lijst2[j]);
-                j++;
-            } else if (j == aantal/2) {
-                klaar.add(lijst1[i]);
-                i++;
-            }
-            else if (lijst1[i] <= lijst2[j]) {
-                klaar.add(lijst1[i]);
-                i++;
-
-            } else {
-                klaar.add(lijst2[j]);
-                j++;
-            }
+        klaar = Sort.mergen(lijst1, lijst2);
 
 
-            a++;
-
-
-        }
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
         System.out.println(klaar.toString());
+        System.out.println(Integer.toString(klaar.size()));
         System.out.println(duration / 1000000 + "ms" );
 
         //sorteren

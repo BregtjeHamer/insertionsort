@@ -15,12 +15,12 @@ public class SortThread implements Runnable {
     @Override
     public void run() {
 
-        if (teSorteren.length > 10) {
+        if (teSorteren.length > 50000) {
 
             if (teSorteren.length % 2 != 0) {
                 lijst1 = new int[teSorteren.length / 2 + 1];
-                lijst2 = new int[teSorteren.length / 2 - 1];
-            } else {
+                lijst2 = new int[teSorteren.length / 2];
+            } else if (teSorteren.length % 2 == 0){
                 lijst1= new int[teSorteren.length / 2];
                 lijst2 = new int[teSorteren.length / 2];
             }
