@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Sort {
 
 
-    public static void sorteren(int[] ongesorteerd) {
+    public static int[] sorteren(int[] ongesorteerd) {
 
         int tijdelijk;
         for (int i = 1; i < ongesorteerd.length; i++) {
@@ -25,38 +25,36 @@ public class Sort {
             }
 
         }
+        return ongesorteerd;
+
 
     }
 
-    public static ArrayList<Integer> mergen(int[] lijst1, int[] lijst2) {
-        ArrayList<Integer> klaar = new ArrayList<>();
+    public static int[] mergen(int[] lijst1, int[] lijst2) {
+        int[] klaar = new int[lijst1.length + lijst2.length];
 
         int i = 0, j = 0, k = 0;
-        while (i < lijst1.length && j < lijst2.length)
-        {
-            if (lijst1[i] < lijst2[j])
-            {
-                klaar.add(lijst1[i]);
+        while (i < lijst1.length && j < lijst2.length) {
+            if (lijst1[i] < lijst2[j]) {
+                klaar[k] = lijst1[i];
+
                 i++;
-            }
-            else
-            {
-                klaar.add(lijst2[j]);
+            } else {
+                klaar[k] = lijst2[j];
+
                 j++;
             }
             k++;
         }
 
-        while (i < lijst1.length)
-        {
-            klaar.add(lijst1[i]);
+        while (i < lijst1.length) {
+            klaar[k] = lijst1[i];
             i++;
             k++;
         }
 
-        while (j < lijst2.length)
-        {
-            klaar.add(lijst2[j]);
+        while (j < lijst2.length) {
+            klaar[k] = lijst2[j];
             j++;
             k++;
         }

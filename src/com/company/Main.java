@@ -1,105 +1,59 @@
 package com.company;
 
 
-import java.util.ArrayList;
-
 public class Main {
 
 
     public static void main(String[] args) {
 //
-        int aantal = 50000;
-        ArrayList<Integer> klaar;
+        int aantal = 200000;
+        int[] klaar;
 
-        int lijst1[] = new int[aantal / 2];
-        int lijst2[] = new int[aantal / 2];
+        int lijst1[] = new int[aantal];
+
+
+        for (int j = 0; j < aantal; j++) {
+            lijst1[j] = (int) (Math.random() * aantal) + 1;
+
+        }
 
         for (int i = 0; i < 10; i++) {
+//        new Main().print(lijst1, "lijst 1 ongesorteerd: " , lijst1.length );
+//        System.out.println("\n");
 
-//            int ongesorteerd[] = new int[aantal];
+
+            SortThread s1 = new SortThread(lijst1);
+            Thread t1 = new Thread(s1);
 
 
-            for (int j = 0; j < lijst1.length; j++) {
-                lijst1[j] = (int) (Math.random() * aantal) + 1;
-                lijst2[j] = (int) (Math.random() * aantal) + 1;
+            long startTime = System.nanoTime();
+            t1.start();
+
+            try {
+                t1.join();
+
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
             }
+
+            klaar = s1.getKlaar();
+            long endTime = System.nanoTime();
+//        new Main().print(klaar, "lijst gesorteerd MAIN: ", lijst1.length);
+//        System.out.println("\n");
+
+
+            long duration = endTime - startTime;
+            System.out.println(duration / 1000000 );
+//"Eindtijd: " +
+//+ " ms"
+
         }
 
-        new Main().print(lijst1, "lijst 1 ongesorteerd: ");
-        System.out.println("\n");
-        new Main().print(lijst2, "lijst 2 ongesorteerd: ");
-        System.out.println("\n");
-
-        SortThread s1 = new SortThread(lijst1);
-        SortThread s2 = new SortThread(lijst2);
-
-        Thread t1 = new Thread(s1);
-        Thread t2 = new Thread(s2);
-
-        long startTime = System.nanoTime();
-        t1.start();
-        t2.start();
-        try {
-            t1.join();
-            t2.join();
-        } catch (InterruptedException ex) {
-            System.out.println(ex);
-        }
-
-        int[] gesorteerd1 = s1.getTeSorteren();
-        new Main().print(gesorteerd1, "lijst 1 gesorteerd: ");
-        System.out.println("\n");
-
-        int[] gesorteerd2 = s2.getTeSorteren();
-        new Main().print(gesorteerd2, "lijst 2 gesorteerd: ");
-        System.out.println("\n");
-
-        //samenvoegen
-//        for (int i = 0; i <lijst1.length; i++) {
-//            for (int j = 0; j < lijst1.length; j++) {
-//
-//
-//                if (lijst1[i] <= lijst2[i]) {
-//                    klaar.add(lijst1[i]);
-//
-//                } else {
-//                    klaar.add(lijst2[i]);
-//                }
-//
-//            }
-//        }
-
-        klaar = Sort.mergen(lijst1, lijst2);
-
-
-        long endTime = System.nanoTime();
-        long duration = endTime - startTime;
-        System.out.println(klaar.toString());
-        System.out.println(Integer.toString(klaar.size()));
-        System.out.println(duration / 1000000 + "ms" );
-
-        //sorteren
-//            new Main().print(ongesorteerd);
-//            System.out.println("\n");
-
-
-//            System.out.println("\n");
-//            long startTime = System.nanoTime();
-////            Sort.sorteren(ongesorteerd);
-//
-//            long endTime = System.nanoTime();
-////            new Main().print(ongesorteerd);
-//
-//            long duration = endTime - startTime;
-//            System.out.println("\n");
-//            System.out.println("looptijd " + (i + 1) + ": " + duration / 1000000 + "ms");
-////            totaal[i] = (int) (duration / 1000000);
     }
 
+    public void print(int[] lijst, String woord, int lenght) {
 
-    public void print(int[] lijst, String woord) {
-
-        System.out.println(woord);
+        System.out.println(woord + lenght);
         for (int i : lijst) {
 
             System.out.print(i);

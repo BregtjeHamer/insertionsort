@@ -6,7 +6,8 @@ public class SortThread implements Runnable {
     private int[] teSorteren;
     private int lijst1[];
     private int lijst2[];
-    private ArrayList<Integer> klaar;
+    private int[] gesorteerd;
+    private int[] klaar;
 
     public SortThread(int[] ongesorteerd) {
         teSorteren = ongesorteerd;
@@ -14,14 +15,14 @@ public class SortThread implements Runnable {
 
     @Override
     public void run() {
-
-        if (teSorteren.length > 50000) {
+// telkens  +100
+        if (teSorteren.length  >1110) {
 
             if (teSorteren.length % 2 != 0) {
                 lijst1 = new int[teSorteren.length / 2 + 1];
                 lijst2 = new int[teSorteren.length / 2];
-            } else if (teSorteren.length % 2 == 0){
-                lijst1= new int[teSorteren.length / 2];
+            } else if (teSorteren.length % 2 == 0) {
+                lijst1 = new int[teSorteren.length / 2];
                 lijst2 = new int[teSorteren.length / 2];
             }
 
@@ -45,7 +46,7 @@ public class SortThread implements Runnable {
             Thread t1 = new Thread(s1);
             Thread t2 = new Thread(s2);
 
-            long startTime = System.nanoTime();
+
             t1.start();
             t2.start();
             try {
@@ -55,29 +56,26 @@ public class SortThread implements Runnable {
                 System.out.println(ex);
             }
 
-            int[] gesorteerd1 = s1.getTeSorteren();
-            new Main().print(gesorteerd1, "lijst 1 gesorteerd: ");
-            System.out.println("\n");
+            int[] gesorteerd1 = s1.getKlaar();
+//
 
-            int[] gesorteerd2 = s2.getTeSorteren();
-            new Main().print(gesorteerd2, "lijst 2 gesorteerd: ");
-            System.out.println("\n");
+            int[] gesorteerd2 = s2.getKlaar();
+//
 
             klaar = Sort.mergen(gesorteerd1, gesorteerd2);
 
 
-            long endTime = System.nanoTime();
-            long duration = endTime - startTime;
-            System.out.println(klaar.toString());
-            System.out.println(duration / 1000000 + "ms" );
+
         } else {
 
-            Sort.sorteren(teSorteren);
+          klaar =  Sort.sorteren(teSorteren);
+
+
         }
 
     }
 
-    public int[] getTeSorteren() {
-        return teSorteren;
+    public int[] getKlaar() {
+        return klaar;
     }
 }
